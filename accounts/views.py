@@ -11,6 +11,6 @@ class UserProfileView(mixins.UpdateModelMixin, generics.GenericAPIView):
     queryset = UserProfile.objects.all()
     lookup_field = 'uuid'
 
-    def patch(self, request, *args, **kwargs):
-        return self.partial_update(request, *args, **kwargs)
+    def put(self, request, *args, **kwargs):
+        return self.update(request, *args, **kwargs)
 
