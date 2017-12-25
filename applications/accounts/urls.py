@@ -3,7 +3,7 @@ from django.conf.urls import url
 from rest_auth.registration.views import RegisterView
 from rest_auth.views import LoginView
 
-from accounts import views
+from applications.accounts import views
 
 urlpatterns = [
     url(r'^signup', RegisterView.as_view(), name='account_signup'),

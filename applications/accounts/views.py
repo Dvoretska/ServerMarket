@@ -1,8 +1,8 @@
 from rest_framework import generics
 from rest_framework import mixins
 
-from accounts.models import UserProfile
-from accounts.serializers import UserProfileSerializer
+from applications.accounts.models import UserProfile
+from applications.accounts.serializers import UserProfileSerializer
 
 
 class UserProfileView(mixins.UpdateModelMixin, generics.GenericAPIView):
