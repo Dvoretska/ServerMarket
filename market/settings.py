@@ -51,7 +51,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_swagger',
 
-    'applications.accounts'
+    'applications.accounts',
+    'applications.location',
 ]
 
 AUTHENTICATION_BACKENDS = (

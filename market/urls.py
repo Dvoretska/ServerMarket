@@ -22,6 +22,6 @@ schema_view = get_swagger_view(title='Market API')
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'accounts/', include('applications.accounts.urls')),
-    url(r'countries/', include('applications.countries.urls')),
+    url(r'location/', include('applications.location.urls')),
     url(r'^$', schema_view)
 ]
