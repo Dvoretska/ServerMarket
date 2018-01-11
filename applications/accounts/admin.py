@@ -6,4 +6,4 @@ from applications.accounts.models import UserProfile
 @admin.register(UserProfile)
 class UserProfileAdmin(admin.ModelAdmin):
 
-    fields = ('username', 'email', 'first_name', 'last_name')
+    fields = ('username', 'email', 'first_name', 'last_name', 'country', 'city')
