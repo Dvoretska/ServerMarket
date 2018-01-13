@@ -4,12 +4,12 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework_jwt.views import VerifyJSONWebToken
 
 from applications.accounts.models import UserProfile
-from applications.accounts.serializers import UserProfileSerializer
+from applications.accounts.serializers import UserProfileSerializer, UserProfileUpdateSerializer
 
 
 class UserProfileView(generics.UpdateAPIView):
 
-    serializer_class = UserProfileSerializer
+    serializer_class = UserProfileUpdateSerializer
     permission_classes = (IsAuthenticatedOrReadOnly, )
     queryset = UserProfile.objects.all()
     lookup_field = 'uuid'
