@@ -4,19 +4,19 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework_jwt.views import VerifyJSONWebToken
 
 from applications.accounts.models import UserProfile
-from applications.accounts.permission import IsOwnerOrReadOnly
 from applications.accounts.serializers import UserProfileSerializer
 
 
-class UserProfileView(mixins.UpdateModelMixin, generics.GenericAPIView):
+class UserProfileView(generics.UpdateAPIView):
 
     serializer_class = UserProfileSerializer
-    permission_classes = IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly
+    permission_classes = (IsAuthenticatedOrReadOnly, )
     queryset = UserProfile.objects.all()
     lookup_field = 'uuid'
 
-    def put(self, request, *args, **kwargs):
-        return self.update(request, *args, **kwargs)
+    def initial(self, request, *args, **kwargs):
+        self.kwargs['uuid'] = request.user.uuid
+        super(UserProfileView, self).initial(request, args, kwargs)
 
 
 class UserVerifyJWT(VerifyJSONWebToken):
