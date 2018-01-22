@@ -52,6 +52,7 @@ INSTALLED_APPS = [
 
     'applications.accounts',
     'applications.location',
+    'applications.ads',
 ]
 
 AUTHENTICATION_BACKENDS = (

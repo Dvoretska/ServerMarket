@@ -12,7 +12,6 @@ class CountryView(APIView):
     permission_classes = ()
 
     def get(self, request):
-
         return Response({country.name: country.alpha_2.lower() for country in pycountry.countries})
 
 
