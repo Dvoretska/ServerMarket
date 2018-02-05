@@ -7,7 +7,8 @@ class Ad(TimeStampedModel):
 
     subject = models.CharField(_('Subject'), max_length=255)
     message = models.TextField()
-    category = models.ForeignKey('Category')
+    category = models.ForeignKey('Category', related_name='categories')
+    location = models.CharField(max_length=255, null=True, blank=True)
 
 
 class Category(models.Model):
@@ -15,7 +16,6 @@ class Category(models.Model):
     name = models.CharField(_('Category'), max_length=255)
 
     class Meta:
-
         verbose_name_plural = _('Categories')
 
     def __str__(self):
