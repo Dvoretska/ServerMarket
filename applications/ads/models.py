@@ -10,6 +10,12 @@ class Ad(TimeStampedModel):
     category = models.ForeignKey('Category', related_name='categories')
     location = models.CharField(max_length=255, null=True, blank=True)
 
+    class Meta:
+        verbose_name_plural = _('Ads')
+
+    def __str__(self):
+        return self.subject
+
 
 class Category(models.Model):
 
