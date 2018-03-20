@@ -9,6 +9,7 @@ class Ad(TimeStampedModel):
     message = models.TextField()
     category = models.ForeignKey('Category', related_name='categories')
     location = models.CharField(max_length=255, null=True, blank=True)
+    user = models.ForeignKey('accounts.UserProfile', null=True)
 
     class Meta:
         verbose_name_plural = _('Ads')

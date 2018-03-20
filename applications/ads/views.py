@@ -31,6 +31,7 @@ class AdCreateView(CreateAPIView):
             )
         data = request.data
         data['category'] = category.pk
+        data['user'] = self.request.user.pk
         serializer = self.get_serializer(data=data)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)

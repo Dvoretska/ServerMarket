@@ -12,5 +12,5 @@ class CategoryAdmin(admin.ModelAdmin):
 @admin.register(Ad)
 class CategoryAdmin(admin.ModelAdmin):
 
-    fields = ('subject', 'message', 'location', 'category')
+    fields = ('subject', 'message', 'location', 'category', 'user')
 

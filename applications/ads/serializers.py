@@ -14,4 +14,4 @@ class AdSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Ad
-        fields = ('subject', 'message', 'category', 'location')
+        fields = ('subject', 'message', 'category', 'location', 'user')
