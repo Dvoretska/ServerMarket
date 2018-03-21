@@ -4,8 +4,8 @@ from rest_framework import status
 from rest_framework.generics import ListAPIView, CreateAPIView
 from rest_framework.response import Response
 
-from applications.ads.models import Category
-from applications.ads.serializers import CategorySerializer, AdSerializer
+from applications.ads.models import Category, Ad
+from applications.ads.serializers import CategorySerializer, AdSerializer, AdListSerializer
 
 
 class CategoriesListView(ListAPIView):
@@ -16,6 +16,12 @@ class CategoriesListView(ListAPIView):
     def get(self, request, *args, **kwargs):
         qs = self.filter_queryset(self.get_queryset())
         return Response([category[0] for category in qs.values_list('name')])
+
+
+class AdListView(ListAPIView):
+
+    serializer_class = AdListSerializer
+    queryset = Ad.objects.all()
 
 
 class AdCreateView(CreateAPIView):
