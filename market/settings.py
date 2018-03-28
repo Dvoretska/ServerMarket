@@ -49,11 +49,14 @@ INSTALLED_APPS = [
     'allauth.account',
     'rest_framework',
     'rest_framework_swagger',
+    'storages',
 
     'applications.accounts',
     'applications.location',
     'applications.ads',
 ]
+
+DEFAULT_FILE_STORAGE = 'storages.backends.dropbox.DropBoxStorage'
 
 AUTHENTICATION_BACKENDS = (
     # Needed to login by username in Django admin, regardless of `allauth`
@@ -201,3 +204,6 @@ STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+DROPBOX_OAUTH2_TOKEN = 'ouHtn_3WxgAAAAAAAAAAMAWsOqJA4s7p7uJkdLhJzS32byQhuNMPnbQgYvYrL1mX'
+DROPBOX_ROOT_PATH = '/'
