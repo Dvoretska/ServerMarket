@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'applications.accounts',
     'applications.location',
     'applications.ads',
+    'applications.ads.my',
 ]
 
 DEFAULT_FILE_STORAGE = 'storages.backends.dropbox.DropBoxStorage'
