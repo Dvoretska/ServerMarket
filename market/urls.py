@@ -26,6 +26,7 @@ urlpatterns = [
     url(r'accounts/', include('applications.accounts.urls')),
     url(r'my/', include('applications.ads.my.urls')),
     url(r'ads/', include('applications.ads.urls')),
+    url(r'categories/', include('applications.categories.urls')),
     url(r'location/', include('applications.location.urls')),
     url(r'^$', schema_view)
 ]

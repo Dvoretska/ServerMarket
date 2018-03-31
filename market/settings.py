@@ -53,6 +53,7 @@ INSTALLED_APPS = [
 
     'applications.accounts',
     'applications.location',
+    'applications.categories',
     'applications.ads',
     'applications.ads.my',
 ]

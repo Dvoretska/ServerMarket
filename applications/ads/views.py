@@ -5,8 +5,9 @@ from rest_framework.generics import ListAPIView, CreateAPIView
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
-from applications.ads.models import Category, Ad
+from applications.ads.models import Ad
 from applications.ads.serializers import CategorySerializer, AdSerializer, AdListSerializer
+from applications.categories.models import Category
 
 
 class CategoriesListView(ListAPIView):
