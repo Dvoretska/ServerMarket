@@ -6,4 +6,5 @@ from .models import Category
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
 
-    fields = ('name', 'slug')
+    fields = ('name', )
+    list_display = ('name', 'slug')
