@@ -5,7 +5,7 @@ from applications.ads.models import Ad
 
 class AdFilter(filters.FilterSet):
 
-    category = filters.CharFilter(field_name='category__name')
+    category = filters.CharFilter(field_name='category__slug')
 
     class Meta:
         model = Ad
