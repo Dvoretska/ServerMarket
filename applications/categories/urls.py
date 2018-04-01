@@ -1,6 +1,6 @@
 from django.conf.urls import url
 
-from applications.ads.views import CategoriesListView, AdCreateView, AdListView
+from applications.categories.views import CategoriesListView
 
 urlpatterns = [
     url(r'^$', CategoriesListView.as_view(), name='get_categories'),

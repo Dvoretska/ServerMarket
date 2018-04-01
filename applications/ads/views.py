@@ -1,23 +1,15 @@
 from django.core.exceptions import ObjectDoesNotExist
 from django.utils.translation import ugettext_lazy as _
+from django_filters import rest_framework as filters
 from rest_framework import status
 from rest_framework.generics import ListAPIView, CreateAPIView
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
+from applications.ads.filters import AdFilter
 from applications.ads.models import Ad
-from applications.ads.serializers import CategorySerializer, AdSerializer, AdListSerializer
+from applications.ads.serializers import AdSerializer, AdListSerializer
 from applications.categories.models import Category
-
-
-class CategoriesListView(ListAPIView):
-
-    serializer_class = CategorySerializer
-    queryset = Category.objects.all()
-
-    def get(self, request, *args, **kwargs):
-        qs = self.filter_queryset(self.get_queryset())
-        return Response([category[0] for category in qs.values_list('name')])
 
 
 class AdListView(ListAPIView):
@@ -25,6 +17,8 @@ class AdListView(ListAPIView):
     serializer_class = AdListSerializer
     queryset = Ad.objects.all()
     permission_classes = (AllowAny,)
+    filter_backends = (filters.DjangoFilterBackend,)
+    filter_class = AdFilter
 
 
 class AdCreateView(CreateAPIView):
@@ -33,7 +27,7 @@ class AdCreateView(CreateAPIView):
 
     def create(self, request, *args, **kwargs):
         try:
-            category = Category.objects.get(name=self.request.data.get('category').title())
+            category = Category.objects.get(name=self.request.data.get('category'))
         except ObjectDoesNotExist:
             return Response(
                 {'category': _('Category does not exist')}, status=status.HTTP_400_BAD_REQUEST
