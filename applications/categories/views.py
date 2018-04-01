@@ -9,6 +9,7 @@ class CategoriesListView(ListAPIView):
 
     serializer_class = CategorySerializer
     queryset = Category.objects.all()
+    permission_classes = (AllowAny,)
 
     def get(self, request, *args, **kwargs):
         qs = self.filter_queryset(self.get_queryset())
