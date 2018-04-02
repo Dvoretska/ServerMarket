@@ -27,7 +27,7 @@ class AdCreateView(CreateAPIView):
 
     def create(self, request, *args, **kwargs):
         try:
-            category = Category.objects.get(name=self.request.data.get('category'))
+            category = Category.objects.get(slug=self.request.data.get('category'))
         except ObjectDoesNotExist:
             return Response(
                 {'category': _('Category does not exist')}, status=status.HTTP_400_BAD_REQUEST
