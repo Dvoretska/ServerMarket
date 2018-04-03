@@ -38,3 +38,4 @@ django-filter==1.1.0
 django-autoslug==1.9.3
 django-redis-cache==1.7.1
 rest-framework-cache==0.1
+Pillow==4.3.0
