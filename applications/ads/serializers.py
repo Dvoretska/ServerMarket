@@ -20,6 +20,7 @@ class AdListSerializer(CachedSerializerMixin, serializers.ModelSerializer):
 
     class Meta:
         model = Ad
+        fields = ('subject', 'message', 'category', 'location', 'user', 'price', 'image')
 
 
 cache_registry.register(AdListSerializer)
