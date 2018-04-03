@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'django_filters',
     'rest_framework_swagger',
     'storages',
+    'rest_framework_cache',
 
     'applications.accounts',
     'applications.location',
@@ -126,6 +127,10 @@ REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',),
 
     'PAGE_SIZE': 16
+}
+
+REST_FRAMEWORK_CACHE = {
+    'DEFAULT_CACHE_BACKEND': 'default',
 }
 
 SWAGGER_SETTINGS = {

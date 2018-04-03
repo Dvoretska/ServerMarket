@@ -19,6 +19,10 @@ from django.contrib import admin
 from rest_framework_swagger.views import get_swagger_view
 from django.conf.urls.static import static
 
+from rest_framework_cache.registry import cache_registry
+
+cache_registry.autodiscover()
+
 schema_view = get_swagger_view(title='Market API')
 
 urlpatterns = [

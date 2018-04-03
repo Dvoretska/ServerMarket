@@ -36,3 +36,4 @@ django-storages==1.6.6
 dropbox==8.7.1
 django-filter==1.1.0
 django-autoslug==1.9.3
+django-redis-cache==1.7.1
