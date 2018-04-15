@@ -16,3 +16,19 @@ def get_tree_ads_count(category):
     if category.is_leaf_node():
         return category.ads.count() or 0
     return sum([get_tree_ads_count(category) for category in category.get_children()])
+
+
+def get_bread_crumbs(category):
+    if not category:
+        return []
+    result = []
+    category = Category.objects.filter(slug=category).first()
+    print('>>>', category)
+    if category:
+        result.append({'name': category.name, 'slug': category.slug})
+        while category.parent:
+            category = category.parent
+            result.append({'name': category.name, 'slug': category.slug})
+    return result
+
+

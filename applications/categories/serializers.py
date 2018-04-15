@@ -26,3 +26,4 @@ class CategorySerializer(serializers.ModelSerializer):
     def get_parent(cls, obj):
         return obj.parent.name if obj.parent else 'Category'
 
+

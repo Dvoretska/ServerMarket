@@ -10,6 +10,7 @@ from applications.ads.filters import AdFilter
 from applications.ads.models import Ad
 from applications.ads.serializers import AdSerializer, AdListSerializer
 from applications.categories.models import Category
+from applications.categories.services import get_bread_crumbs
 
 
 class AdListView(ListAPIView):
@@ -19,6 +20,12 @@ class AdListView(ListAPIView):
     permission_classes = (AllowAny,)
     filter_backends = (filters.DjangoFilterBackend,)
     filter_class = AdFilter
+
+    def list(self, request, *args, **kwargs):
+        response = super().list(request, args, kwargs)
+        response.data['bread_crumbs'] = get_bread_crumbs(self.request.query_params.get('category'))
+        return response
+
 
 
 class AdCreateView(CreateAPIView):
