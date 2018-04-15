@@ -1,10 +1,11 @@
 from django.contrib import admin
 
 from .models import Category
+from mptt.admin import MPTTModelAdmin
 
 
 @admin.register(Category)
-class CategoryAdmin(admin.ModelAdmin):
+class CategoryAdmin(MPTTModelAdmin):
 
-    fields = ('name', )
-    list_display = ('name', 'slug')
+    fields = ('name', 'parent')
+    list_display = ('name', 'slug', 'parent')

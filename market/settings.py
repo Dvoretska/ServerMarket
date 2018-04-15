@@ -52,12 +52,13 @@ INSTALLED_APPS = [
     'rest_framework_swagger',
     'storages',
     'rest_framework_cache',
+    'mptt',
 
     'applications.accounts',
     'applications.location',
     'applications.categories',
     'applications.ads',
-    'applications.ads.my',
+    'applications.ads.my'
 ]
 
 DEFAULT_FILE_STORAGE = 'storages.backends.dropbox.DropBoxStorage'
@@ -131,7 +132,7 @@ REST_FRAMEWORK = {
 
 REST_FRAMEWORK_CACHE = {
     'DEFAULT_CACHE_BACKEND': 'default',
-    'DEFAULT_CACHE_TIMEOUT': 3600
+    'DEFAULT_CACHE_TIMEOUT': 10000
 }
 
 SWAGGER_SETTINGS = {
