@@ -1,5 +1,6 @@
 from rest_framework import serializers
 
+from applications.categories.services import get_tree_ads_count
 from .models import Category
 
 
@@ -15,7 +16,7 @@ class CategorySerializer(serializers.ModelSerializer):
 
     @classmethod
     def get_count(cls, obj):
-        return obj.categories.count()
+        return get_tree_ads_count(obj)
 
     @classmethod
     def get_parent_slug(cls, obj):

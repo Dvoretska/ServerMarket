@@ -10,3 +10,9 @@ def get_flat_tree_categories_list(category):
             return flat_children_list
         return [category.slug]
     return []
+
+
+def get_tree_ads_count(category):
+    if category.is_leaf_node():
+        return category.ads.count() or 0
+    return sum([get_tree_ads_count(category) for category in category.get_children()])
