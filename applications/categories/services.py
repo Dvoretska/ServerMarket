@@ -19,7 +19,7 @@ def get_tree_ads_count(category):
 
 
 def get_bread_crumbs(category):
-    result = [{'name': 'All ads', 'slug': 'all_ads'}]
+    result = [{'name': 'All ads', 'slug': ''}]
     if not category:
         return result
     category = Category.objects.filter(slug=category.split(',')[0]).first()
@@ -29,7 +29,7 @@ def get_bread_crumbs(category):
             categories.append({'name': category.name, 'slug': category.slug})
         while category.parent:
             category = category.parent
-            categories.append({'name': category.name, 'slug': ''})
+            categories.append({'name': category.name, 'slug': category.slug})
         categories.reverse()
     result.extend(categories)
     return result
