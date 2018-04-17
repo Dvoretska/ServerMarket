@@ -27,7 +27,6 @@ class AdListView(ListAPIView):
         return response
 
 
-
 class AdCreateView(CreateAPIView):
 
     serializer_class = AdSerializer
