@@ -1,3 +1,5 @@
+import copy
+
 from django.core.exceptions import ObjectDoesNotExist
 from django.utils.translation import ugettext_lazy as _
 from django_filters import rest_framework as filters
@@ -38,7 +40,7 @@ class AdCreateView(CreateAPIView):
             return Response(
                 {'category': _('Category does not exist')}, status=status.HTTP_400_BAD_REQUEST
             )
-        data = request.data
+        data = copy.deepcopy(request.data)
         data['category'] = category.pk
         data['user'] = self.request.user.pk
         serializer = self.get_serializer(data=data)
