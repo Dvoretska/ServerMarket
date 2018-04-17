@@ -29,7 +29,7 @@ def get_bread_crumbs(category):
             categories.append({'name': category.name, 'slug': category.slug})
         while category.parent:
             category = category.parent
-            categories.append({'name': category.name, 'slug': category.slug})
+            categories.append({'name': category.name, 'slug': ''})
         categories.reverse()
     result.extend(categories)
     return result
