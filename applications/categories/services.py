@@ -33,3 +33,7 @@ def get_bread_crumbs(category):
         categories.reverse()
     result.extend(categories)
     return result
+
+
+def is_category_exists(slug):
+    return Category.objects.filter(slug=slug).exists()

@@ -5,7 +5,7 @@ from applications.ads.models import Ad
 from django_filters import Filter
 from django_filters.fields import Lookup
 
-from applications.categories.services import get_flat_tree_categories_list
+from applications.categories.services import get_flat_tree_categories_list, is_category_exists
 
 
 class ListFilter(Filter):
@@ -16,7 +16,8 @@ class ListFilter(Filter):
     def get_lookups(cls, value):
         lookups = []
         for category in value.split(','):
-            lookups.extend([category] + get_flat_tree_categories_list(category))
+            if is_category_exists(category):
+                lookups.extend([category] + get_flat_tree_categories_list(category))
         return lookups
 
 
