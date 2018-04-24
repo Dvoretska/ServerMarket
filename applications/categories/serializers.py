@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from django.utils.translation import gettext as _
 
 from applications.categories.services import get_tree_ads_count
 from .models import Category
@@ -24,6 +25,6 @@ class CategorySerializer(serializers.ModelSerializer):
 
     @classmethod
     def get_parent(cls, obj):
-        return obj.parent.name if obj.parent else 'Category'
+        return obj.parent.name if obj.parent else _('Category')
 
 

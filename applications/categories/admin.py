@@ -7,5 +7,5 @@ from mptt.admin import MPTTModelAdmin
 @admin.register(Category)
 class CategoryAdmin(MPTTModelAdmin):
 
-    fields = ('name', 'parent')
-    list_display = ('name', 'slug', 'parent')
+    fields = ('name_ru', 'name_en', 'parent')
+    list_display = ('name_ru', 'name_en', 'slug', 'parent')

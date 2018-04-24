@@ -40,3 +40,4 @@ django-redis-cache==1.7.1
 rest-framework-cache==0.1
 Pillow==4.3.0
 django-mptt==0.9.0
+django-modeltranslation==0.12.2

@@ -1,4 +1,5 @@
 from applications.categories.models import Category
+from django.utils.translation import gettext as _
 
 
 def get_flat_tree_categories_list(category):
@@ -19,7 +20,7 @@ def get_tree_ads_count(category):
 
 
 def get_bread_crumbs(category):
-    result = [{'name': 'All ads', 'slug': ''}]
+    result = [{'name': _('All ads'), 'slug': ''}]
     if not category:
         return result
     category = Category.objects.filter(slug=category.split(',')[0]).first()

@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'storages',
     'rest_framework_cache',
     'mptt',
+    'modeltranslation',
 
     'applications.accounts',
     'applications.location',
@@ -60,6 +61,16 @@ INSTALLED_APPS = [
     'applications.ads',
     'applications.ads.my'
 ]
+
+gettext = lambda s: s
+LANGUAGES = (
+    ('en', 'English'),
+    ('ru', 'Русский')
+)
+DEFAULT_LANGUAGE = 'en'
+MODELTRANSLATION_FALLBACK_LANGUAGES = {'default': ('en', 'ru')}
+
+LOCALE_PATHS = [os.path.join(BASE_DIR, 'locale')]
 
 DEFAULT_FILE_STORAGE = 'storages.backends.dropbox.DropBoxStorage'
 
@@ -92,7 +103,8 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware'
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.locale.LocaleMiddleware'
 ]
 
 ROOT_URLCONF = 'market.urls'
