@@ -9,7 +9,7 @@ class Category(MPTTModel):
 
     name = models.CharField(_('Category'), max_length=255, null=True)
     parent = TreeForeignKey('self', null=True, blank=True, related_name='children', db_index=True)
-    slug = AutoSlugField(null=True, default=None, unique=True, populate_from='name')
+    slug = AutoSlugField(null=True, default=None, unique=True, populate_from='name_en')
 
     class MPTTMeta:
         order_insertion_by = ['name']
