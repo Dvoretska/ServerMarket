@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-24 22:12+0300\n"
+"POT-Creation-Date: 2018-04-27 20:46+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -28,15 +28,16 @@ msgstr "Предмет"
 msgid "Price"
 msgstr "Цена"
 
-#: applications/ads/models.py:17
+#: applications/ads/models.py:16
 msgid "Ads"
 msgstr "Объявления"
 
-#: applications/ads/views.py:41
+#: applications/ads/views.py:38
 msgid "Category does not exist"
 msgstr "Категория не существует"
 
 #: applications/categories/models.py:10
+#: applications/categories/serializers.py:28
 msgid "Category"
 msgstr "Категория"
 
@@ -45,5 +46,8 @@ msgid "Categories"
 msgstr "Категории"
 
 #: applications/categories/services.py:23
-msgid "All ads"
-msgstr "Все объявления"
+msgid "All rubrics"
+msgstr "Все рубрики"
+
+#~ msgid "All ads"
+#~ msgstr "Все объявления"

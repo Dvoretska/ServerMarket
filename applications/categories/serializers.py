@@ -25,6 +25,6 @@ class CategorySerializer(serializers.ModelSerializer):
 
     @classmethod
     def get_parent(cls, obj):
-        return obj.parent.name if obj.parent else _('Category')
+        return obj.parent.name if obj.parent else _('All rubrics')
 
 
