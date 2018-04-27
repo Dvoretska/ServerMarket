@@ -21,7 +21,7 @@ class AdListSerializer(CachedSerializerMixin, serializers.ModelSerializer):
 
     class Meta:
         model = Ad
-        fields = ('subject', 'message', 'category', 'location', 'user', 'price', 'images')
+        fields = ('subject', 'message', 'category', 'location', 'user', 'price', 'images', 'created')
 
     def get_images(self, obj):
         return [ad_image.image.url for ad_image in obj.images.all()]
