@@ -36,5 +36,9 @@ def get_bread_crumbs(category):
     return result
 
 
+def get_category(slug):
+    return Category.objects.filter(slug=slug).first()
+
+
 def is_category_exists(slug):
     return Category.objects.filter(slug=slug).exists()

@@ -4,6 +4,7 @@ except ImportError:
     pass
 
 DEBUG = True
+DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
 
 DATABASES = {
     "default": {

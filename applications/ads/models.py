@@ -11,10 +11,14 @@ class Ad(TimeStampedModel):
     location = models.CharField(max_length=255, null=True, blank=True)
     user = models.ForeignKey('accounts.UserProfile', null=True)
     price = models.IntegerField(_('Price'), default=0)
-    image = models.ImageField(null=True, blank=True)
 
     class Meta:
         verbose_name_plural = _('Ads')
 
     def __str__(self):
         return self.subject
+
+
+class AdImageModel(models.Model):
+    image = models.ImageField()
+    ad = models.ForeignKey(Ad, related_name='images')
