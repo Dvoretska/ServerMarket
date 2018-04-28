@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from django.utils.translation import gettext as _
+from rest_framework_cache.registry import cache_registry
 
 from applications.categories.services import get_tree_ads_count
 from .models import Category
@@ -28,3 +29,4 @@ class CategorySerializer(serializers.ModelSerializer):
         return obj.parent.name if obj.parent else _('All rubrics')
 
 
+cache_registry.register(CategorySerializer)
