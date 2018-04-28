@@ -3,7 +3,7 @@ import copy
 from django.utils.translation import ugettext_lazy as _
 from django_filters import rest_framework as filters
 from rest_framework import status
-from rest_framework.generics import ListAPIView, CreateAPIView
+from rest_framework.generics import ListAPIView, CreateAPIView, RetrieveUpdateAPIView
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
@@ -53,6 +53,14 @@ class AdCreateView(CreateAPIView):
         ad = Ad.objects.get(pk=ad_pk)
         images = [AdImageModel(image=image, ad=ad) for image in images]
         AdImageModel.objects.bulk_create(images)
+
+
+class AdDetailView(RetrieveUpdateAPIView):
+
+    serializer_class = AdListSerializer
+    permission_classes = (AllowAny,)
+    queryset = Ad.objects.all()
+    lookup_field = 'slug'
 
 
 

@@ -17,6 +17,22 @@ class AdSerializer(serializers.ModelSerializer):
 class AdListSerializer(CachedSerializerMixin, serializers.ModelSerializer):
 
     category = CategorySerializer(read_only=True)
+    image = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Ad
+        fields = ('slug', 'subject', 'message', 'category', 'location', 'user', 'price', 'image', 'created')
+
+    @classmethod
+    def get_image(cls, obj):
+        image_instance = obj.images.first()
+        if image_instance:
+            return image_instance.image.url
+
+
+class AdDetailSerializer(CachedSerializerMixin, serializers.ModelSerializer):
+
+    category = CategorySerializer(read_only=True)
     images = serializers.SerializerMethodField()
 
     class Meta:
