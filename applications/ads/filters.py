@@ -2,7 +2,7 @@ from django_filters import rest_framework as filters
 
 from applications.ads.models import Ad
 
-from django_filters import Filter
+from django_filters import Filter, NumberFilter
 from django_filters.fields import Lookup
 
 from applications.categories.services import get_flat_tree_categories_list, is_category_exists
@@ -24,7 +24,9 @@ class ListFilter(Filter):
 class AdFilter(filters.FilterSet):
 
     category = ListFilter(field_name='category__slug')
+    min_price = NumberFilter(field_name='price', lookup_expr='gte')
+    max_price = NumberFilter(field_name='price', lookup_expr='lte')
 
     class Meta:
         model = Ad
-        fields = ('category',)
+        fields = ('category', 'min_price', 'max_price')
