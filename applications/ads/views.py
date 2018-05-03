@@ -9,7 +9,7 @@ from rest_framework.response import Response
 
 from applications.ads.filters import AdFilter
 from applications.ads.models import Ad, AdImageModel
-from applications.ads.serializers import AdSerializer, AdListSerializer
+from applications.ads.serializers import AdSerializer, AdListSerializer, AdDetailSerializer
 from applications.categories.services import get_bread_crumbs, get_category
 
 
@@ -57,10 +57,13 @@ class AdCreateView(CreateAPIView):
 
 class AdDetailView(RetrieveUpdateAPIView):
 
-    serializer_class = AdListSerializer
+    serializer_class = AdDetailSerializer
     permission_classes = (AllowAny,)
     queryset = Ad.objects.all()
     lookup_field = 'slug'
+
+    def get(self, request, *args, **kwargs):
+        return self.retrieve(request, *args, **kwargs)
 
 
 
