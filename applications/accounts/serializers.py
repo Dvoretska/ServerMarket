@@ -7,7 +7,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.UserProfile
-        fields = 'last_name', 'first_name', 'country', 'city', 'username', 'email'
+        fields = 'last_name', 'first_name', 'country', 'city', 'username', 'email', 'phone'
 
 
 class UserProfileUpdateSerializer(serializers.ModelSerializer):
