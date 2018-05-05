@@ -31,7 +31,7 @@ class AdListSerializer(CachedSerializerMixin, serializers.ModelSerializer):
             return image_instance.image.url
 
 
-class AdDetailSerializer(CachedSerializerMixin, serializers.ModelSerializer):
+class AdDetailSerializer(serializers.ModelSerializer):
 
     category = CategorySerializer(read_only=True)
     user = UserProfileSerializer(read_only=True)
