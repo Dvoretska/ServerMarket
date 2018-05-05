@@ -1,5 +1,4 @@
-from rest_framework import mixins
-from rest_framework.generics import GenericAPIView
+from rest_framework.generics import UpdateAPIView
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework_jwt.views import VerifyJSONWebToken
 
@@ -7,7 +6,7 @@ from applications.accounts.models import UserProfile
 from applications.accounts.serializers import UserProfileSerializer, UserProfileUpdateSerializer
 
 
-class UserProfileView(mixins.UpdateModelMixin, GenericAPIView):
+class UserProfileView(UpdateAPIView):
 
     serializer_class = UserProfileUpdateSerializer
     permission_classes = (IsAuthenticatedOrReadOnly, )
@@ -16,16 +15,13 @@ class UserProfileView(mixins.UpdateModelMixin, GenericAPIView):
 
     def initial(self, request, *args, **kwargs):
         self.kwargs['uuid'] = request.user.uuid
-        super(UserProfileView, self).initial(request, args, kwargs)
-
-    def put(self, request, *args, **kwargs):
-        return self.update(request, *args, **kwargs)
+        super().initial(request, *args, **kwargs)
 
 
 class UserVerifyJWT(VerifyJSONWebToken):
 
     def post(self, request, *args, **kwargs):
-        response = super(UserVerifyJWT, self).post(request)
+        response = super().post(request)
         serializer = self.get_serializer(data=request.data)
         if serializer.is_valid():
             user = serializer.object.get('user') or request.user
