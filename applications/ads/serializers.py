@@ -1,5 +1,6 @@
 from rest_framework import serializers
 
+from applications.accounts.serializers import UserProfileSerializer
 from applications.ads.models import Ad
 from applications.categories.serializers import CategorySerializer
 
@@ -33,13 +34,15 @@ class AdListSerializer(CachedSerializerMixin, serializers.ModelSerializer):
 class AdDetailSerializer(CachedSerializerMixin, serializers.ModelSerializer):
 
     category = CategorySerializer(read_only=True)
+    user = UserProfileSerializer(read_only=True)
     images = serializers.SerializerMethodField()
 
     class Meta:
         model = Ad
         fields = ('subject', 'message', 'category', 'location', 'user', 'price', 'images', 'created')
 
-    def get_images(self, obj):
+    @classmethod
+    def get_images(cls, obj):
         return [ad_image.image.url for ad_image in obj.images.all()]
 
 
