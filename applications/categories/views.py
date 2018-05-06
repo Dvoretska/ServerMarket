@@ -1,6 +1,8 @@
+from django.http import HttpResponse
 from rest_framework.generics import ListAPIView
 from rest_framework.permissions import AllowAny
 from django_filters import rest_framework as filters
+from rest_framework.response import Response
 
 from applications.categories.filters import CategoryFilter
 from .models import Category
@@ -26,5 +28,5 @@ class CategoriesListView(ListAPIView):
             return qs.filter(parent=None)
         elif category.is_leaf_node():
             self.request.query_params['category'] = category.parent.slug
-        return qs
+        return HttpResponse, Response
 
