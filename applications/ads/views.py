@@ -24,6 +24,8 @@ class AdListView(ListAPIView):
     def list(self, request, *args, **kwargs):
         response = super().list(request, args, kwargs)
         response.data['bread_crumbs'] = get_bread_crumbs(self.request.query_params.get('category'))
+        response.data['min_price'] = self.queryset.order_by('price').first().price
+        response.data['max_price'] = self.queryset.order_by('-price').first().price
         return response
 
 
