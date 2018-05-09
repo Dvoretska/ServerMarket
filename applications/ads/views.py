@@ -1,5 +1,6 @@
 import copy
 
+from django.db.models import Q
 from django.utils.translation import ugettext_lazy as _
 from django_filters import rest_framework as filters
 from rest_framework import status
@@ -10,6 +11,7 @@ from rest_framework.response import Response
 from applications.ads.filters import AdFilter
 from applications.ads.models import Ad, AdImageModel
 from applications.ads.serializers import AdSerializer, AdListSerializer, AdDetailSerializer
+from applications.ads.services import get_ads_in_category
 from applications.categories.services import get_bread_crumbs, get_category
 
 
@@ -23,9 +25,14 @@ class AdListView(ListAPIView):
 
     def list(self, request, *args, **kwargs):
         response = super().list(request, args, kwargs)
-        response.data['bread_crumbs'] = get_bread_crumbs(self.request.query_params.get('category'))
-        response.data['min_price'] = self.queryset.order_by('price').first().price
-        response.data['max_price'] = self.queryset.order_by('-price').first().price
+        category = request.query_params.get('category')
+        if category:
+            ads = get_ads_in_category(category).order_by('-price')
+            if ads:
+                response.data['max_price'] = ads.first().price
+        else:
+            response.data['max_price'] = self.queryset.order_by('-price').first().price
+        response.data['bread_crumbs'] = get_bread_crumbs(category)
         return response
 
 

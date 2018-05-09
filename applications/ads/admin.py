@@ -6,7 +6,7 @@ from applications.ads.models import Ad
 @admin.register(Ad)
 class AdAdmin(admin.ModelAdmin):
 
-    fields = ('subject', 'message', 'location', 'category', 'user')
+    fields = ('subject', 'message', 'location', 'category', 'user', 'price')
     list_display = ('subject', 'message', 'location', 'category', 'user', 'get_images')
 
     def get_images(self, obj):
