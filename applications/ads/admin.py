@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from applications.ads.models import Ad
+from applications.ads.models import Ad, AdImageModel
 
 
 @admin.register(Ad)
@@ -11,3 +11,12 @@ class AdAdmin(admin.ModelAdmin):
 
     def get_images(self, obj):
         return [image for image in obj.images.all()]
+
+
+@admin.register(AdImageModel)
+class AdImageAdmin(admin.ModelAdmin):
+
+    fields = ('image', 'ad')
+    list_display = ('pk', 'image', 'ad')
+    list_filter = ('ad',)
+
