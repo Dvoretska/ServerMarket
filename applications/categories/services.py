@@ -13,10 +13,10 @@ def get_flat_tree_categories_list(category):
     return []
 
 
-def get_tree_ads_count(category):
+def get_tree_ads_count(category, min_price, max_price):
     if category.is_leaf_node():
-        return category.ads.count() or 0
-    return sum([get_tree_ads_count(category) for category in category.get_children()])
+        return category.ads.filter(min_price & max_price).count() or 0
+    return sum([get_tree_ads_count(category, min_price, max_price) for category in category.get_children()])
 
 
 def get_bread_crumbs(category):

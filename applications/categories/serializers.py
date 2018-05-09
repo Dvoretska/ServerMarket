@@ -1,3 +1,4 @@
+from django.db.models import Q
 from rest_framework import serializers
 from django.utils.translation import gettext as _
 from rest_framework_cache.registry import cache_registry
@@ -16,9 +17,14 @@ class CategorySerializer(serializers.ModelSerializer):
         model = Category
         fields = ('name', 'slug', 'count', 'parent_slug', 'parent', 'is_leaf_node')
 
-    @classmethod
-    def get_count(cls, obj):
-        return get_tree_ads_count(obj)
+    def get_count(self, obj):
+        min_price = self.context['request'].query_params.get('min_price')
+        max_price = self.context['request'].query_params.get('max_price')
+        return get_tree_ads_count(
+            obj,
+            Q(price__gte=min_price) if min_price else Q(),
+            Q(price__lte=max_price) if min_price else Q()
+        )
 
     @classmethod
     def get_parent_slug(cls, obj):
