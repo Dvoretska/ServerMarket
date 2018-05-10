@@ -2,6 +2,7 @@ static/
 media/
 venv/
 local/
+local.py
 .idea/
 *.sqlite3
 *.pyc

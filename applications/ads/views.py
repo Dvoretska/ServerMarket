@@ -1,6 +1,5 @@
 import copy
 
-from django.db.models import Q
 from django.utils.translation import ugettext_lazy as _
 from django_filters import rest_framework as filters
 from rest_framework import status
@@ -26,14 +25,17 @@ class AdListView(ListAPIView):
     def list(self, request, *args, **kwargs):
         response = super().list(request, args, kwargs)
         category = request.query_params.get('category')
-        if category:
-            ads = get_ads_in_category(category).order_by('-price')
-            if ads:
-                response.data['max_price'] = ads.first().price
-        else:
-            response.data['max_price'] = self.queryset.order_by('-price').first().price
+        response.data['max_price'] = self._get_max_price_in_category(category)
         response.data['bread_crumbs'] = get_bread_crumbs(category)
         return response
+
+    def _get_max_price_in_category(self, category):
+        if not category:
+            return self.queryset.order_by('-price').first().price
+
+        ads = get_ads_in_category(category).order_by('-price')
+        if ads:
+            return ads.first().price
 
 
 class AdCreateView(CreateAPIView):
