@@ -42,3 +42,6 @@ rest-framework-cache==0.1
 Pillow==4.3.0
 django-mptt==0.9.0
 django-modeltranslation==0.12.2
+behave==1.2.6
+behave-django==1.1.0
+

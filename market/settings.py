@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'rest_framework_cache',
     'mptt',
     'modeltranslation',
+    'behave_django',
 
     'applications.accounts',
     'applications.location',
