@@ -72,9 +72,3 @@ class AdDetailView(RetrieveUpdateAPIView):
     permission_classes = (AllowAny,)
     queryset = Ad.objects.all()
     lookup_field = 'slug'
-
-    def get(self, request, *args, **kwargs):
-        return self.retrieve(request, *args, **kwargs)
-
-
-
