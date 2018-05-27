@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'mptt',
     'modeltranslation',
     'behave_django',
+    'currency_open_exchange',
 
     'applications.accounts',
     'applications.location',
@@ -82,6 +83,8 @@ AUTHENTICATION_BACKENDS = (
     # `allauth` specific authentication methods, such as login by e-mail
     'allauth.account.auth_backends.AuthenticationBackend',
 )
+
+EXCHANGE_APP_ID = ''
 
 REST_USE_JWT = True
 REST_SESSION_LOGIN = False
