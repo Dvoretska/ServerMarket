@@ -2,7 +2,7 @@ import copy
 
 from django.utils.translation import ugettext_lazy as _
 from django_filters import rest_framework as filters
-from rest_framework.filters import OrderingFilter
+from rest_framework.filters import OrderingFilter, SearchFilter
 from rest_framework import status
 from rest_framework.generics import ListAPIView, CreateAPIView, RetrieveUpdateAPIView
 from rest_framework.permissions import AllowAny
@@ -20,9 +20,10 @@ class AdListView(ListAPIView):
     serializer_class = AdListSerializer
     queryset = Ad.objects.all()
     permission_classes = (AllowAny,)
-    filter_backends = (OrderingFilter, filters.DjangoFilterBackend)
+    filter_backends = (OrderingFilter, filters.DjangoFilterBackend, SearchFilter)
     filter_class = AdFilter
     ordering_fields = ('price', 'created')
+    search_fields = ('subject',)
 
     def list(self, request, *args, **kwargs):
         response = super().list(request, args, kwargs)
