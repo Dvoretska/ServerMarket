@@ -44,4 +44,4 @@ django-mptt==0.9.0
 django-modeltranslation==0.12.2
 behave==1.2.6
 behave-django==1.1.0
-currency-open-exchange==0.0.1
+currency-open-exchange==0.0.6

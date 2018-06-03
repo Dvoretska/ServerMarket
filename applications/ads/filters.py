@@ -1,4 +1,4 @@
-from django_filters import rest_framework as filters
+from django_filters import rest_framework as filters, OrderingFilter
 
 from applications.ads.models import Ad
 
