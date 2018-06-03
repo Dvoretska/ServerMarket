@@ -234,3 +234,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DROPBOX_OAUTH2_TOKEN = 'ouHtn_3WxgAAAAAAAAAAMAWsOqJA4s7p7uJkdLhJzS32byQhuNMPnbQgYvYrL1mX'
 DROPBOX_ROOT_PATH = '/'
+
+try:
+    from market.local import *
+except ImportError:
+    pass
