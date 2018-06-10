@@ -1,7 +1,11 @@
-from rest_framework.generics import ListAPIView, DestroyAPIView
+from rest_framework.exceptions import NotFound
+from rest_framework.generics import ListAPIView, DestroyAPIView, get_object_or_404, ListCreateAPIView, CreateAPIView
+from rest_framework.mixins import DestroyModelMixin
 from rest_framework.permissions import IsAuthenticated
 
 from applications.ads.models import Ad
+from applications.ads.my.models import SavedAd
+from applications.ads.my.serializers import SavedAdSerializer
 from applications.ads.serializers import AdListSerializer
 
 
@@ -19,3 +23,39 @@ class MyAdDetailView(DestroyAPIView):
     queryset = Ad.objects.all()
     permission_classes = (IsAuthenticated,)
     lookup_field = 'slug'
+
+
+class CreateSavedAdView(CreateAPIView):
+
+    serializer_class = SavedAdSerializer
+
+    def create(self, request, *args, **kwargs):
+
+        ad = Ad.objects.filter(slug=kwargs['slug']).first()
+        if not ad:
+            raise NotFound
+
+        request.data.update({
+            'user': request.user.pk,
+            'ad': ad.pk
+        })
+        return super().create(request, *args, **kwargs)
+
+
+class DeleteSavedAdView(DestroyAPIView):
+    serializer_class = SavedAdSerializer
+    queryset = SavedAd.objects.all()
+    lookup_field = 'slug'
+
+    def get_object(self):
+        obj = get_object_or_404(self.queryset, ad__slug=self.kwargs[self.lookup_field], user=self.request.user)
+        self.check_object_permissions(self.request, obj)
+        return obj
+
+
+class SavedAdView(ListAPIView):
+
+    serializer_class = SavedAdSerializer
+
+    def get_queryset(self):
+        return SavedAd.objects.filter(user=self.request.user)
