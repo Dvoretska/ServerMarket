@@ -1,11 +1,10 @@
 from rest_framework.exceptions import NotFound
 from rest_framework.generics import ListAPIView, DestroyAPIView, get_object_or_404, ListCreateAPIView, CreateAPIView
-from rest_framework.mixins import DestroyModelMixin
 from rest_framework.permissions import IsAuthenticated
 
 from applications.ads.models import Ad
 from applications.ads.my.models import SavedAd
-from applications.ads.my.serializers import SavedAdSerializer
+from applications.ads.my.serializers import SavedAdSerializer, LightSavedAdSerializer
 from applications.ads.serializers import AdListSerializer
 
 
@@ -27,7 +26,7 @@ class MyAdDetailView(DestroyAPIView):
 
 class CreateSavedAdView(CreateAPIView):
 
-    serializer_class = SavedAdSerializer
+    serializer_class = LightSavedAdSerializer
 
     def create(self, request, *args, **kwargs):
 
@@ -55,7 +54,9 @@ class DeleteSavedAdView(DestroyAPIView):
 
 class SavedAdView(ListAPIView):
 
-    serializer_class = SavedAdSerializer
+    serializer_class = AdListSerializer
+    permission_classes = (IsAuthenticated,)
 
     def get_queryset(self):
-        return SavedAd.objects.filter(user=self.request.user)
+        saved_pk = SavedAd.objects.filter(user=self.request.user).values_list('ad__pk', flat=True)
+        return Ad.objects.prefetch_related('savedad_set').filter(pk__in=saved_pk)
