@@ -1,5 +1,5 @@
 from rest_framework.exceptions import NotFound
-from rest_framework.generics import ListAPIView, DestroyAPIView, get_object_or_404, ListCreateAPIView, CreateAPIView
+from rest_framework.generics import ListAPIView, DestroyAPIView, get_object_or_404, CreateAPIView
 from rest_framework.permissions import IsAuthenticated
 
 from applications.ads.models import Ad
@@ -38,7 +38,10 @@ class CreateSavedAdView(CreateAPIView):
             'user': request.user.pk,
             'ad': ad.pk
         })
-        return super().create(request, *args, **kwargs)
+        response = super().create(request, *args, **kwargs)
+        serializer = AdListSerializer(instance=ad)
+        response.data = serializer.data
+        return response
 
 
 class DeleteSavedAdView(DestroyAPIView):
