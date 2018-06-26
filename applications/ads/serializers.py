@@ -2,7 +2,7 @@ from rest_framework import serializers
 
 from applications.accounts.serializers import UserProfileSerializer
 from applications.ads.models import Ad
-from applications.categories.serializers import CategorySerializer
+from applications.categories.serializers import CategorySerializer, LightCategorySerializer
 
 from rest_framework_cache.serializers import CachedSerializerMixin
 from rest_framework_cache.registry import cache_registry
@@ -17,7 +17,7 @@ class AdSerializer(serializers.ModelSerializer):
 
 class AdListSerializer(CachedSerializerMixin, serializers.ModelSerializer):
 
-    category = CategorySerializer(read_only=True)
+    category = LightCategorySerializer(read_only=True)
     image = serializers.SerializerMethodField()
 
     class Meta:

@@ -7,15 +7,30 @@ from applications.categories.services import get_tree_ads_count
 from .models import Category
 
 
-class CategorySerializer(serializers.ModelSerializer):
-
-    count = serializers.SerializerMethodField()
+class LightCategorySerializer(serializers.ModelSerializer):
     parent_slug = serializers.SerializerMethodField()
     parent = serializers.SerializerMethodField()
 
     class Meta:
         model = Category
-        fields = ('name', 'slug', 'count', 'parent_slug', 'parent', 'is_leaf_node')
+        fields = ('name', 'slug', 'parent_slug', 'parent', 'is_leaf_node')
+
+    @classmethod
+    def get_parent_slug(cls, obj):
+        return obj.parent.slug if obj.parent else 'category'
+
+    @classmethod
+    def get_parent(cls, obj):
+        return obj.parent.name if obj.parent else _('All rubrics')
+
+
+class CategorySerializer(LightCategorySerializer):
+
+    count = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Category
+        fields = LightCategorySerializer.Meta.fields + ('count',)
 
     def get_count(self, obj):
         min_price = self.context['request'].query_params.get('min_price')
@@ -25,14 +40,6 @@ class CategorySerializer(serializers.ModelSerializer):
             Q(price__gte=min_price) if min_price else Q(),
             Q(price__lte=max_price) if min_price else Q()
         )
-
-    @classmethod
-    def get_parent_slug(cls, obj):
-        return obj.parent.slug if obj.parent else 'category'
-
-    @classmethod
-    def get_parent(cls, obj):
-        return obj.parent.name if obj.parent else _('All rubrics')
 
 
 cache_registry.register(CategorySerializer)
