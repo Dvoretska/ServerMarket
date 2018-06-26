@@ -39,7 +39,7 @@ class AdDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Ad
-        fields = ('subject', 'message', 'category', 'location', 'user', 'price', 'images', 'created')
+        fields = ('subject', 'slug', 'message', 'category', 'location', 'user', 'price', 'images', 'created')
 
     @classmethod
     def get_images(cls, obj):
