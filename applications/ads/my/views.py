@@ -1,6 +1,8 @@
 from rest_framework.exceptions import NotFound
 from rest_framework.generics import ListAPIView, DestroyAPIView, get_object_or_404, CreateAPIView
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from applications.ads.models import Ad
 from applications.ads.my.models import SavedAd
@@ -59,8 +61,18 @@ class SavedAdView(ListAPIView):
 
     serializer_class = AdListSerializer
     permission_classes = (IsAuthenticated,)
-    pagination_class = None
 
     def get_queryset(self):
         saved_pk = SavedAd.objects.filter(user=self.request.user).values_list('ad__pk', flat=True)
         return Ad.objects.prefetch_related('savedad_set').filter(pk__in=saved_pk)
+
+
+class SavedSlugsView(APIView):
+
+    permission_classes = (IsAuthenticated,)
+
+    def get(self, request, *args, **kwargs):
+        saved_pk = SavedAd.objects.filter(user=request.user).values_list('ad__pk', flat=True)
+        return Response(
+            Ad.objects.prefetch_related('savedad_set').filter(pk__in=saved_pk).values_list('slug', flat=True)
+        )
