@@ -59,6 +59,7 @@ class SavedAdView(ListAPIView):
 
     serializer_class = AdListSerializer
     permission_classes = (IsAuthenticated,)
+    pagination_class = None
 
     def get_queryset(self):
         saved_pk = SavedAd.objects.filter(user=self.request.user).values_list('ad__pk', flat=True)
