@@ -13,6 +13,7 @@ class Ad(TimeStampedModel):
     location = models.CharField(max_length=255, null=True, blank=True)
     user = models.ForeignKey('accounts.UserProfile', null=True)
     price = models.IntegerField(_('Price'), default=0)
+    phone = models.CharField(max_length=50, blank=True, null=True)
 
     class Meta:
         verbose_name_plural = _('Ads')

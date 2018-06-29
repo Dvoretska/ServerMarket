@@ -12,7 +12,7 @@ class AdSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Ad
-        fields = ('subject', 'message', 'category', 'location', 'user', 'price', 'pk')
+        fields = ('subject', 'phone', 'message', 'category', 'location', 'user', 'price', 'pk')
 
 
 class AdListSerializer(CachedSerializerMixin, serializers.ModelSerializer):
@@ -39,7 +39,7 @@ class AdDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Ad
-        fields = ('subject', 'slug', 'message', 'category', 'location', 'user', 'price', 'images', 'created')
+        fields = ('subject', 'slug', 'phone', 'message', 'category', 'location', 'user', 'price', 'images', 'created')
 
     @classmethod
     def get_images(cls, obj):
