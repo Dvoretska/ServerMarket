@@ -12,6 +12,7 @@ from applications.ads.filters import AdFilter
 from applications.ads.models import Ad, AdImageModel
 from applications.ads.serializers import AdSerializer, AdListSerializer, AdDetailSerializer
 from applications.ads.services import get_ads_in_category
+from applications.categories.models import Category
 from applications.categories.services import get_bread_crumbs, get_category
 
 
@@ -75,3 +76,12 @@ class AdDetailView(RetrieveUpdateAPIView):
     permission_classes = (AllowAny,)
     queryset = Ad.objects.all()
     lookup_field = 'slug'
+
+    def perform_update(self, serializer):
+        serializer.instance.images.all().delete()
+        for key, value in self.request.data.items():
+            if 'files' in key:
+                AdImageModel.objects.create(ad=serializer.instance, image=value)
+        serializer.instance.category = Category.objects.get(slug=self.request.data['category'])
+        serializer.save()
+
