@@ -9,3 +9,4 @@ class UserProfile(AbstractUser):
     country = models.CharField(max_length=255, default='', blank=True)
     city = models.CharField(max_length=255, default='', blank=True)
     phone = models.CharField(max_length=50, blank=True, null=True)
+    avatar = models.ImageField(blank=True, null=True)
