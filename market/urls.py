@@ -18,6 +18,7 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from rest_framework_swagger.views import get_swagger_view
 from django.conf.urls.static import static
+from allauth.account.views import ConfirmEmailView
 
 from rest_framework_cache.registry import cache_registry
 
@@ -32,6 +33,9 @@ urlpatterns = [
     url(r'ads/', include('applications.ads.urls')),
     url(r'categories/', include('applications.categories.urls')),
     url(r'location/', include('applications.location.urls')),
+    url(r'^account-confirm-email/(?P<key>[-:\w]+)/$', ConfirmEmailView.as_view(),
+        name='account_confirm_email'),
+
     url(r'^$', schema_view)
 ]
 
