@@ -18,7 +18,7 @@ class Ad(TimeStampedModel):
 
     class Meta:
         verbose_name_plural = _('Ads')
-        ordering = ('-created',)
+        ordering = ('-is_vip', '-created',)
 
     def __str__(self):
         return self.subject
