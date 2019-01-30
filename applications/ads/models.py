@@ -14,6 +14,7 @@ class Ad(TimeStampedModel):
     user = models.ForeignKey('accounts.UserProfile', null=True)
     price = models.IntegerField(_('Price'), default=0)
     phone = models.CharField(max_length=50, blank=True, null=True)
+    is_vip = models.BooleanField(_('Is VIP'), default=False)
 
     class Meta:
         verbose_name_plural = _('Ads')

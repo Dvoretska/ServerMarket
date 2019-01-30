@@ -16,6 +16,12 @@ from applications.categories.models import Category
 from applications.categories.services import get_bread_crumbs, get_category
 
 
+class VipsListView(ListAPIView):
+    serializer_class = AdListSerializer
+    queryset = Ad.objects.filter(is_vip=True)
+    permission_classes = (AllowAny,)
+
+
 class AdListView(ListAPIView):
 
     serializer_class = AdListSerializer
