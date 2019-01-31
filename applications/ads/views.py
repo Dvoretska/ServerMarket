@@ -20,7 +20,7 @@ class VipsListView(ListAPIView):
     serializer_class = AdListSerializer
     queryset = Ad.objects.filter(is_vip=True)[:25]
     permission_classes = (AllowAny,)
-    paginate_by = None
+    pagination_class = None
 
 
 class AdListView(ListAPIView):
