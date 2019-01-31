@@ -18,9 +18,9 @@ from applications.categories.services import get_bread_crumbs, get_category
 
 class VipsListView(ListAPIView):
     serializer_class = AdListSerializer
-    queryset = Ad.objects.filter(is_vip=True)
+    queryset = Ad.objects.filter(is_vip=True)[:25]
     permission_classes = (AllowAny,)
-
+    paginate_by = None
 
 class AdListView(ListAPIView):
 
@@ -28,7 +28,7 @@ class AdListView(ListAPIView):
     queryset = Ad.objects.all()
     permission_classes = (AllowAny,)
     filter_backends = (OrderingFilter, filters.DjangoFilterBackend, SearchFilter)
-    filter_class = AdFilter
+    filter_class = AdFilter,
     ordering_fields = ('price', 'created')
     search_fields = ('subject',)
 
