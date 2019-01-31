@@ -9,5 +9,6 @@ urlpatterns = [
     url(r'^signup', RegisterView.as_view(), name='account_signup'),
     url(r'^login', LoginView.as_view(), name='account_login'),
     url(r'^api-token-verify/', UserVerifyJWT.as_view()),
-    url(r'^profile/$', views.UserProfileView.as_view(), name='user_profile')
+    url(r'^profile/$', views.UserProfileView.as_view(), name='user_profile'),
+    url(r'^destroy/$', views.UserProfileDestroyView.as_view(), name='destroy')
 ]

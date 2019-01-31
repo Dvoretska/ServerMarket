@@ -1,4 +1,4 @@
-from rest_framework.generics import UpdateAPIView
+from rest_framework.generics import UpdateAPIView, DestroyAPIView
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework_jwt.views import VerifyJSONWebToken
 
@@ -16,6 +16,17 @@ class UserProfileView(UpdateAPIView):
     def initial(self, request, *args, **kwargs):
         self.kwargs['uuid'] = request.user.uuid
         super().initial(request, *args, **kwargs)
+
+
+class UserProfileDestroyView(DestroyAPIView):
+
+    serializer_class = UserProfileUpdateSerializer
+    permission_classes = (IsAuthenticatedOrReadOnly, )
+    queryset = UserProfile.objects.all()
+
+    def delete(self, request, *args, **kwargs):
+        self.kwargs['pk'] = request.user.pk
+        return self.destroy(request, *args, **kwargs)
 
 
 class UserVerifyJWT(VerifyJSONWebToken):
