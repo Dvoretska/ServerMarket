@@ -22,13 +22,14 @@ class VipsListView(ListAPIView):
     permission_classes = (AllowAny,)
     paginate_by = None
 
+
 class AdListView(ListAPIView):
 
     serializer_class = AdListSerializer
     queryset = Ad.objects.all()
     permission_classes = (AllowAny,)
     filter_backends = (OrderingFilter, filters.DjangoFilterBackend, SearchFilter)
-    filter_class = AdFilter,
+    filter_class = AdFilter
     ordering_fields = ('price', 'created')
     search_fields = ('subject',)
 
