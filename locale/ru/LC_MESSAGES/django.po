@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-27 20:46+0000\n"
+"POT-Creation-Date: 2019-02-03 11:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,24 +20,35 @@ msgstr ""
 "%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
 "%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: applications/ads/models.py:8
+#: applications/accounts/views.py:65
+msgid "Wrong password."
+msgstr "Неверный пароль."
+
+#: applications/accounts/views.py:67
+msgid "Confirm password is not the same."
+msgstr "Пароли не совпадают."
+
+#: applications/ads/models.py:10
 msgid "Subject"
 msgstr "Предмет"
 
-#: applications/ads/models.py:13
+#: applications/ads/models.py:15
 msgid "Price"
 msgstr "Цена"
 
-#: applications/ads/models.py:16
+#: applications/ads/models.py:17
+msgid "Is VIP"
+msgstr "Is VIP"
+
+#: applications/ads/models.py:20
 msgid "Ads"
 msgstr "Объявления"
 
-#: applications/ads/views.py:38
+#: applications/ads/views.py:60
 msgid "Category does not exist"
 msgstr "Категория не существует"
 
 #: applications/categories/models.py:10
-#: applications/categories/serializers.py:28
 msgid "Category"
 msgstr "Категория"
 
@@ -45,6 +56,7 @@ msgstr "Категория"
 msgid "Categories"
 msgstr "Категории"
 
+#: applications/categories/serializers.py:24
 #: applications/categories/services.py:23
 msgid "All rubrics"
 msgstr "Все рубрики"
